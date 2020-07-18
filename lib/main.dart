@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:soicauadmin/const.dart';
+import 'package:soicauadmin/store/app_store.dart';
 
 import 'data.dart';
 
@@ -24,7 +30,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -34,98 +39,121 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Data> listDataBac = Const.dataBAC;
   List<Data> listDataNam = Const.dataNAM;
-
+  final globalKey = GlobalKey<ScaffoldState>();
   bool isBac = true;
+
+  final dbRef = FirebaseDatabase.instance.reference().child("soicau");
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  AppStore appStore = AppStore();
+
+  @override
+  void initState() {
+    inint();
+    super.initState();
+  }
+
+  Future<void> inint() async {
+    appStore.loadLocal();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: globalKey,
         body: SafeArea(
-      top: true,
-      bottom: true,
-      left: true,
-      right: true,
-      child: Container(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            onTap: () {
-                              if (!isBac) {
-                                setState(() {
-                                  isBac = true;
-                                });
-                              }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 50,
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              color: isBac ? Colors.blueGrey : Colors.grey,
-                              child: Text(
-                                "Miền Bắc",
-                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+            top: true,
+            bottom: true,
+            left: true,
+            right: true,
+            child: Observer(
+              builder: (context) => Container(
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                    onTap: () {
+                                      if (!isBac) {
+                                        setState(() {
+                                          isBac = true;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: 50,
+                                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                                      color: isBac ? Colors.blueGrey : Colors.grey,
+                                      child: Text(
+                                        "Miền Bắc",
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+                                      ),
+                                    )),
                               ),
-                            )),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 1,
-                        color: Colors.black,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            onTap: () {
-                              if (isBac) {
-                                setState(() {
-                                  isBac = false;
-                                });
-                              }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 50,
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              color: !isBac ? Colors.blueGrey : Colors.grey,
-                              child: Text(
-                                "Miền Nam",
-                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+                              Container(
+                                height: 50,
+                                width: 1,
+                                color: Colors.black,
                               ),
-                            )),
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: content(),
-                  )
-                ],
-              ),
-            ),
-            GestureDetector(
-              child: Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                color: Colors.blue,
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Lưu",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
+                              Expanded(
+                                flex: 1,
+                                child: GestureDetector(
+                                    onTap: () {
+                                      if (isBac) {
+                                        setState(() {
+                                          isBac = false;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: 50,
+                                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                                      color: !isBac ? Colors.blueGrey : Colors.grey,
+                                      child: Text(
+                                        "Miền Nam",
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: content(),
+                          )
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        save();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        color: Colors.blue,
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Lưu",
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    ));
+            )));
   }
 
   Widget content() {
@@ -165,5 +193,24 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           }),
     );
+  }
+
+  Future<void> save() async {
+    List<Data> dataList = isBac ? listDataBac : listDataNam;
+    String childName = isBac ? "BAC" : "NAM";
+
+    var json = jsonEncode(dataList.map((e) => Data.toJson(e)).toList());
+    print("DATTTTTTTTTTTTTTT ${json.toString()}");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(childName, json);
+    dbRef.child(childName).set(json).then((_) {
+      print("Success");
+      final snackBar = SnackBar(content: Text('Lưu thành công!'));
+      globalKey.currentState.showSnackBar(snackBar);
+    }).catchError((onError) {
+      print(onError);
+      final snackBar = SnackBar(content: Text('Lưu thất bại!'));
+      globalKey.currentState.showSnackBar(snackBar);
+    });
   }
 }
