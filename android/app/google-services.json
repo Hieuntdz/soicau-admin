@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "303021008825",
+    "firebase_url": "https://soi-cau-sieu-chuan-1295e.firebaseio.com",
+    "project_id": "soi-cau-sieu-chuan-1295e",
+    "storage_bucket": "soi-cau-sieu-chuan-1295e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303021008825:android:aba4e7ba7cc0762df1b868",
+        "android_client_info": {
+          "package_name": "com.anime.soicauadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303021008825-r7gipfu51qvd0k8q34piu9jko0n94bs0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRbJhuket3qF8giOHlMcCQ0CoRsyORh0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303021008825-r7gipfu51qvd0k8q34piu9jko0n94bs0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
