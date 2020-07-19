@@ -28,7 +28,7 @@ abstract class _AppStore with Store {
 
   @action
   setTimeRandom(double value) {
-    this.timeRandom = timeRandom;
+    this.timeRandom = value;
   }
 
   @action
