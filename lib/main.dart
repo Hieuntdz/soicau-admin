@@ -65,132 +65,151 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Observer(
               builder: (context) {
                 timeController.text = appStore.timeRandom.toString();
-                return  Container(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
+                return Stack(
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
                               children: [
-                                Text("Thoi gian quay (giây): ",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18)),
-                                Expanded(
-                                  flex: 1,
-                                  child: TextFormField(
-                                    controller: timeController,
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    saveTime(timeController);
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    color: Colors.blue,
-                                    padding: EdgeInsets.all(20),
-                                    child: Text(
-                                      "Lưu",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          fontSize: 25),
+                                Row(
+                                  children: [
+                                    Text("Thoi gian quay (giây): ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18)),
+                                    Expanded(
+                                      flex: 1,
+                                      child: TextFormField(
+                                        controller: timeController,
+                                        keyboardType: TextInputType.number,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20,),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: GestureDetector(
+                                    GestureDetector(
                                       onTap: () {
-                                        if (!appStore.isBac) {
-                                          appStore.setIsBac(true);
-                                        }
+                                        saveTime(timeController);
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
-                                        height: 50,
-                                        padding:
-                                        EdgeInsets.only(top: 10, bottom: 10),
-                                        color: appStore.isBac
-                                            ? Colors.blueGrey
-                                            : Colors.grey,
+                                        color: Colors.blue,
+                                        padding: EdgeInsets.all(20),
                                         child: Text(
-                                          "Miền Bắc",
+                                          "Lưu",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
-                                              fontSize: 20),
+                                              fontSize: 25),
                                         ),
-                                      )),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Container(
-                                  height: 50,
-                                  width: 1,
-                                  color: Colors.black,
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            if (!appStore.isBac) {
+                                              appStore.setIsBac(true);
+                                            }
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            padding: EdgeInsets.only(
+                                                top: 10, bottom: 10),
+                                            color: appStore.isBac
+                                                ? Colors.blueGrey
+                                                : Colors.grey,
+                                            child: Text(
+                                              "Miền Bắc",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          )),
+                                    ),
+                                    Container(
+                                      height: 50,
+                                      width: 1,
+                                      color: Colors.black,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            if (appStore.isBac) {
+                                              appStore.setIsBac(false);
+                                            }
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            padding: EdgeInsets.only(
+                                                top: 10, bottom: 10),
+                                            color: !appStore.isBac
+                                                ? Colors.blueGrey
+                                                : Colors.grey,
+                                            child: Text(
+                                              "Miền Nam",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          )),
+                                    )
+                                  ],
                                 ),
                                 Expanded(
                                   flex: 1,
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        if (appStore.isBac) {
-                                          appStore.setIsBac(false);
-                                        }
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 50,
-                                        padding:
-                                        EdgeInsets.only(top: 10, bottom: 10),
-                                        color: !appStore.isBac
-                                            ? Colors.blueGrey
-                                            : Colors.grey,
-                                        child: Text(
-                                          "Miền Nam",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      )),
+                                  child: content(),
                                 )
                               ],
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: content(),
-                            )
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          save();
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          color: Colors.blue,
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Lưu",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 25),
                           ),
-                        ),
+                          GestureDetector(
+                            onTap: () {
+                              save();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              color: Colors.blue,
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                "Lưu",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 25),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    appStore.showLoading
+                        ? Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: double.infinity,
+                            color: Colors.blueGrey.withOpacity(0.7),
+                            child: Text(
+                              "Loading....",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          )
+                        : Container(),
+                  ],
                 );
               },
             )));
@@ -240,18 +259,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> save() {
+    appStore.setShowLoading(true);
     List<Data> dataList =
         appStore.isBac ? appStore.listDataBac : appStore.listDataNam;
     String childName = appStore.isBac ? "BAC" : "NAM";
 
     var json = jsonEncode(dataList.map((e) => Data.toJson(e)).toList());
     print("DATTTTTTTTTTTTTTT ${json.toString()}");
-    dbRef.child(childName).set(json).then((_)  {
+    dbRef.child(childName).set(json).then((_) {
+      appStore.setShowLoading(false);
       print("Success");
       final snackBar = SnackBar(content: Text('Lưu thành công!'));
       globalKey.currentState.showSnackBar(snackBar);
-      appStore.saveDataLocal(childName,json);
+      appStore.saveDataLocal(childName, json);
     }).catchError((onError) {
+      appStore.setShowLoading(false);
       print(onError);
       final snackBar = SnackBar(content: Text('Lưu thất bại!'));
       globalKey.currentState.showSnackBar(snackBar);
@@ -259,17 +281,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void saveTime(TextEditingController timeController) {
-
+    appStore.setShowLoading(true);
     String value = timeController.text;
     double time = double.parse(value);
 
     print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
     dbRef.child("time").set(timeController.text).then((_) {
       print("Success");
+      appStore.setShowLoading(false);
       final snackBar = SnackBar(content: Text('Lưu thành công!'));
       globalKey.currentState.showSnackBar(snackBar);
       appStore.saveTimeLocal(time);
     }).catchError((onError) {
+      appStore.setShowLoading(false);
       print(onError);
       final snackBar = SnackBar(content: Text('Lưu thất bại!'));
       globalKey.currentState.showSnackBar(snackBar);

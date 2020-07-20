@@ -19,11 +19,19 @@ abstract class _AppStore with Store {
   bool isBac = true;
 
   @observable
+  bool showLoading = false;
+
+  @observable
   double timeRandom = 15;
 
   @action
   setIsBac(bool value) {
     isBac = value;
+  }
+
+  @action
+  setShowLoading(bool value) {
+    showLoading = value;
   }
 
   @action

@@ -54,6 +54,36 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
+  final _$showLoadingAtom = Atom(name: '_AppStore.showLoading');
+
+  @override
+  bool get showLoading {
+    _$showLoadingAtom.reportRead();
+    return super.showLoading;
+  }
+
+  @override
+  set showLoading(bool value) {
+    _$showLoadingAtom.reportWrite(value, super.showLoading, () {
+      super.showLoading = value;
+    });
+  }
+
+  final _$timeRandomAtom = Atom(name: '_AppStore.timeRandom');
+
+  @override
+  double get timeRandom {
+    _$timeRandomAtom.reportRead();
+    return super.timeRandom;
+  }
+
+  @override
+  set timeRandom(double value) {
+    _$timeRandomAtom.reportWrite(value, super.timeRandom, () {
+      super.timeRandom = value;
+    });
+  }
+
   final _$loadLocalAsyncAction = AsyncAction('_AppStore.loadLocal');
 
   @override
@@ -69,6 +99,28 @@ mixin _$AppStore on _AppStore, Store {
         _$_AppStoreActionController.startAction(name: '_AppStore.setIsBac');
     try {
       return super.setIsBac(value);
+    } finally {
+      _$_AppStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setShowLoading(bool value) {
+    final _$actionInfo = _$_AppStoreActionController.startAction(
+        name: '_AppStore.setShowLoading');
+    try {
+      return super.setShowLoading(value);
+    } finally {
+      _$_AppStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setTimeRandom(double value) {
+    final _$actionInfo = _$_AppStoreActionController.startAction(
+        name: '_AppStore.setTimeRandom');
+    try {
+      return super.setTimeRandom(value);
     } finally {
       _$_AppStoreActionController.endAction(_$actionInfo);
     }
@@ -101,7 +153,9 @@ mixin _$AppStore on _AppStore, Store {
     return '''
 listDataBac: ${listDataBac},
 listDataNam: ${listDataNam},
-isBac: ${isBac}
+isBac: ${isBac},
+showLoading: ${showLoading},
+timeRandom: ${timeRandom}
     ''';
   }
 }
