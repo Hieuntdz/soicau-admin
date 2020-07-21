@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:soicauadmin/store/app_store.dart';
+
 import 'data.dart';
 
 void main() {
@@ -77,9 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Row(
                                   children: [
                                     Text("Thoi gian quay (giây): ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18)),
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                     Expanded(
                                       flex: 1,
                                       child: TextFormField(
@@ -94,13 +94,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       child: Container(
                                         alignment: Alignment.center,
                                         color: Colors.blue,
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                                         child: Text(
                                           "Lưu",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 25),
+                                          style:
+                                              TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
                                         ),
                                       ),
                                     ),
@@ -122,17 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                           child: Container(
                                             alignment: Alignment.center,
                                             height: 50,
-                                            padding: EdgeInsets.only(
-                                                top: 10, bottom: 10),
-                                            color: appStore.isBac
-                                                ? Colors.blueGrey
-                                                : Colors.grey,
+                                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                                            color: appStore.isBac ? Colors.blueGrey : Colors.grey,
                                             child: Text(
                                               "Miền Bắc",
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  fontSize: 20),
+                                                  fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
                                             ),
                                           )),
                                     ),
@@ -152,17 +145,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                           child: Container(
                                             alignment: Alignment.center,
                                             height: 50,
-                                            padding: EdgeInsets.only(
-                                                top: 10, bottom: 10),
-                                            color: !appStore.isBac
-                                                ? Colors.blueGrey
-                                                : Colors.grey,
+                                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                                            color: !appStore.isBac ? Colors.blueGrey : Colors.grey,
                                             child: Text(
                                               "Miền Nam",
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  fontSize: 20),
+                                                  fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
                                             ),
                                           )),
                                     )
@@ -186,10 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: EdgeInsets.all(20),
                               child: Text(
                                 "Lưu",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 25),
+                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25),
                               ),
                             ),
                           ),
@@ -204,8 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: Colors.blueGrey.withOpacity(0.7),
                             child: Text(
                               "Loading....",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           )
                         : Container(),
@@ -216,8 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget content() {
-    List<Data> listData =
-        appStore.isBac ? appStore.listDataBac : appStore.listDataNam;
+    List<Data> listData = appStore.isBac ? appStore.listDataBac : appStore.listDataNam;
     return Container(
       child: ListView.builder(
           itemCount: listData.length,
@@ -237,8 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: EdgeInsets.only(left: 10),
                       child: Text(
                         data.name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                     ),
                   ),
@@ -260,8 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> save() {
     appStore.setShowLoading(true);
-    List<Data> dataList =
-        appStore.isBac ? appStore.listDataBac : appStore.listDataNam;
+    List<Data> dataList = appStore.isBac ? appStore.listDataBac : appStore.listDataNam;
     String childName = appStore.isBac ? "BAC" : "NAM";
 
     var json = jsonEncode(dataList.map((e) => Data.toJson(e)).toList());
