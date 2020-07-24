@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>303021008825-u361quukegmfferg89bqpbsev9ihsbh5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.303021008825-u361quukegmfferg89bqpbsev9ihsbh5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyClEx2QCLR7noG4hIz7RlMCKNDIKXtijxE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>303021008825</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.anime.soicauadmin</string>
+	<key>PROJECT_ID</key>
+	<string>soi-cau-sieu-chuan-1295e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>soi-cau-sieu-chuan-1295e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:303021008825:ios:d4ba9dbd54017df1f1b868</string>
+	<key>DATABASE_URL</key>
+	<string>https://soi-cau-sieu-chuan-1295e.firebaseio.com</string>
+</dict>
+</plist>
